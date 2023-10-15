@@ -1,3 +1,5 @@
+// Exercise 6:
+
 import React, { useState } from "react";
 import '../App.css'; // Import App.css for the shared styles
 

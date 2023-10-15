@@ -1,5 +1,8 @@
+// Exercise 2 & 4:
+
 import { useState } from "react";
 import AddCatForm from "./AddCatForm";
+import SingleCat from "./SingleCat";
 
 function BigCats() {
   const cats = [
@@ -53,7 +56,7 @@ function BigCats() {
     <SingleCat
       key={cat.id}
       cat={cat}
-      onDeleteCat={() => handleDeleteCat(cat.id)}
+      onDeleteCat={() => handleDeleteClick(cat.id)}
     />
   ));
 
@@ -62,7 +65,7 @@ function BigCats() {
     setCurrentCats([...currentCats, newCat]);
   };
 
-  const handleDeleteCat = (catId) => {
+  const handleDeleteClick = (catId) => {
     // Filter out the cat with the specified id
     const updatedCats = currentCats.filter((cat) => cat.id !== catId);
     setCurrentCats(updatedCats);
@@ -92,24 +95,6 @@ function BigCats() {
   const handleResetList = () => {
     setCurrentCats(cats);
   };
-
-  function SingleCat({ cat, onDeleteCat }) {
-    const handleDeleteClick = (e) => {
-      e.preventDefault(); // Prevent the default behavior of the anchor tag
-      onDeleteCat(); // Call the delete function
-    };
-
-    return (
-      <li>
-        <img src={cat.image} alt={cat.name} />
-        <h3>{cat.name}</h3>
-        <p>{cat.latinName}</p>
-        <a href="#" onClick={handleDeleteClick}>
-          Delete
-        </a>
-      </li>
-    );
-  }
 
   return (
     <div className="BigCats componentBox">

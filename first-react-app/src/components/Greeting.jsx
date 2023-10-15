@@ -1,3 +1,5 @@
+// Exercise 1:
+
 // standard JSX syntax for creating an element - render with {jsxElement}
 const JsxElement = (props) => {
     let name = "World";

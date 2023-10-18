@@ -1,17 +1,21 @@
 // Exercise 6:
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import '../App.css'; // Import App.css for the shared styles
 
 function Calculator() {
-  const [input1, setInput1] = useState("");
-  const [input2, setInput2] = useState("");
+  const formRef = useRef(null); // 1. Create the ref
+  // const [input1, setInput1] = useState("");
+  // const [input2, setInput2] = useState("");
   const [result, setResult] = useState("");
-  const [operator, setOperator] = useState("");
+  // const [operator, setOperator] = useState("");
 
   const calculate = (op) => {
-    const num1 = parseFloat(input1);
-    const num2 = parseFloat(input2);
+    const data = new FormData(formRef.current);
+    const formObject = Object.fromEntries(data.entries());
+    console.log('formObject', formObject);
+    const num1 = parseFloat(formObject.input1);
+    const num2 = parseFloat(formObject.input2);
 
     if (!isNaN(num1) && !isNaN(num2)) {
       let calculatedResult;
@@ -37,30 +41,30 @@ function Calculator() {
           calculatedResult = "Invalid operator";
       }
       setResult(calculatedResult);
-      setOperator(op);
+      // setOperator(op);
     } else {
       setResult("Invalid input");
     }
   };
 
   const clearResult = () => {
-    setInput1("");
-    setInput2("");
+    // setInput1("");
+    // setInput2("");
     setResult("");
-    setOperator("");
+    // setOperator("");
   };
 
   return (
     <div>
-      <form className="calc componentBox">
+      <form ref={formRef} className="calc componentBox">
         <label htmlFor="input1">Input 1:</label>
         <br />
         <input
           type="text"
           id="input1"
           name="input1"
-          value={input1}
-          onChange={(e) => setInput1(e.target.value)}
+          // value={input1}
+          // onChange={(e) => setInput1(e.target.value)}
         />
         <br />
         <label htmlFor="input2">Input 2:</label>
@@ -69,8 +73,8 @@ function Calculator() {
           type="text"
           id="input2"
           name="input2"
-          value={input2}
-          onChange={(e) => setInput2(e.target.value)}
+          // value={input2}
+          // onChange={(e) => setInput2(e.target.value)}
         />
         <br />
         <label htmlFor="result">Result:</label>
